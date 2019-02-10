@@ -1,0 +1,61 @@
+<div class='card'>
+  <div class='card-header'>
+    {{pageName}}
+  </div>
+  <div class='card-body'>
+    <div class='row'>
+      <div class='col-md-2'>Filter by:</div>
+      <div class='col-md-4'>
+        <input type="text"
+               [(ngModel)]="input"
+        />
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-md-6'>
+        Filtered by {{input}}
+      </div>
+    </div>
+    <div class='table-responsive'>
+      <table class='table'>
+        <thead>
+        <tr>
+          <th>
+            <button class='btn btn-primary'>
+              Show/Hide
+            </button>
+          </th>
+          <th>Product Code</th>
+          <th>Product Name</th>
+          <th>Price</th>
+          <th>Available</th>
+          <th>Rating</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let product of filteredProducts">
+          <th>
+            XXX
+          </th>
+          <th>{{product.code | replaceWithDash: ' '}}</th>
+          <th>{{product.name}}</th>
+          <th>{{product.price | currency: 'THB ' : 'symbol': '1.2' }}</th>
+          <th>Yes</th>
+          <th>
+            <app-rating [rating]="product.rating"
+                        [code]="product.code"
+                        (event)="onRatingClicked($event)"
+            ></app-rating>
+          </th>
+        </tr>
+        <tr *ngIf="!filteredProducts" align="center">
+          <!--<th colspan="5">-->
+            <!--Data not found-->
+          <!--</th>-->
+          <app-page-not-found [colSpan]="2"></app-page-not-found>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
